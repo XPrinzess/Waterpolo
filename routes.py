@@ -11,6 +11,7 @@ def home():
 
 @app.route('/countries')
 def countries():
+    #need a sql query
     return render_template("______") #return something
 
 
