@@ -72,6 +72,6 @@ def pizza(id):
     cur.execute('SELECT name FROM Topping WHERE id IN(SELECT tid FROM PizzaTopping WHERE pid = ?)', (id,))
     topping = cur.fetchall()
     return render_template('pizza.html', pizza=pizza, base=base, topping=topping)
-
+"""
 if __name__ == "__main__":
-    app.run(debug=True) """
+    app.run(debug=True)
