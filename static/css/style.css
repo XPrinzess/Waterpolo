@@ -1,0 +1,13 @@
+/** GLOBAL **/
+
+body {
+    font-family: "Comic Sans MS";
+    background-color: lightblue;
+    color: grey;
+}
+
+header h1 {
+    padding: 50px;
+    width: 100%;
+    background-color: rgb(216, 170, 238);
+}

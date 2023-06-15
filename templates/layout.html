@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link rel = "stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <header>
+            {% include "header.html" %}
+        </header>
+        {% include "nav.html" %}
+        {% block content %}{% endblock %}
+        {% include "footer.html" %}
+    </body>
+</html>
