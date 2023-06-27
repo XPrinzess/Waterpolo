@@ -6,13 +6,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template("home.html", title="____") #put title in instead of underscores
+    return render_template("home.html", title="Waterpolo Players") #title variable names the tab in the website
 
 
 @app.route('/countries')
 def countries():
     #need a sql query
-    return render_template("______") #return something
+    return render_template("countries.html")
 
 
 @app.route('/country/<int:id>')
