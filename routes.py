@@ -11,67 +11,57 @@ def home():
 
 @app.route('/countries')
 def countries():
-    #need a sql query
-    return render_template("countries.html")
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Country')
+    countries = cur.fetchall()
+    return render_template("countries.html", countries=countries, title="Waterpolo Players")
 
 
 @app.route('/country/<int:id>')
 def indiv_country(id):
-    return render_template("______") #return something
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
+    country = cur.fetchone()
+    #cur.execute('SELECT ') #finish query (part of iteration 2)
+    return render_template("country.html", country=country, title="Waterpolo Players")
 
 
 @app.route('/players')
 def players():
-    return render_template("______") #return something
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT Player.id, Player.first_name, Player.last_name, Player.image, Player.world_ranking, Country.flag FROM Player Join Country ON Player.country_id=Country.id;')
+    players = cur.fetchall()
+    #world ranking still required in further iterations (could have interaction from the user how they want the data ordered)
+    return render_template("players.html", players=players, title="Waterpolo Players")
 
 
 @app.route('/player/<int:id>')
 def indiv_player(id):
-    return render_template("______") #return something
+    return render_template("______", title="Waterpolo Players") #return something
 
 
 @app.route('/tournaments')
 def tournaments():
-    return render_template("______") #return something
+    return render_template("______", title="Waterpolo Players") #return something
 
 
 @app.route('/tournament/<int:id>')
 def indiv_tournament(id):
-    return render_template("______") #return something
+    return render_template("______", title="Waterpolo Players") #return something
 
 
 @app.route('/positions')
 def positions():
-    return render_template("______") #return something
+    return render_template("______", title="Waterpolo Players") #return something
 
 
 @app.route('/position/<int:id>')
 def indiv_position(id):
-    return render_template("______") #return something
+    return render_template("______", title="Waterpolo Players") #return something
 
 
-
-
-""" @app.route('/all_pizzas')
-def all_pizzas():
-    conn = sqlite3.connect('pizza.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Pizza')
-    pizzas = cur.fetchall()
-    return render_template('all_pizzas.html', pizzas=pizzas)
-
-
-@app.route('/pizza/<int:id>')
-def pizza(id):
-    conn = sqlite3.connect('pizza.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Pizza WHERE id = ?', (id,))
-    pizza = cur.fetchone()
-    cur.execute('SELECT name FROM Base WHERE id = ?', (pizza[4],))
-    base = cur.fetchone()
-    cur.execute('SELECT name FROM Topping WHERE id IN(SELECT tid FROM PizzaTopping WHERE pid = ?)', (id,))
-    topping = cur.fetchall()
-    return render_template('pizza.html', pizza=pizza, base=base, topping=topping)
-"""
 if __name__ == "__main__":
     app.run(debug=True)
