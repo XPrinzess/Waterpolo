@@ -36,7 +36,6 @@ def players():
     ranked_players = cur.fetchall()
     cur.execute('SELECT Player.id, Player.first_name, Player.last_name, Player.image, Country.flag FROM Player Join Country ON Player.country_id=Country.id WHERE Player.world_ranking IS NULL;')
     players = cur.fetchall()
-    #have the 'none' disappear
     #world ranking still required in further iterations (could have interaction from the user how they want the data ordered)
     return render_template("players.html", ranked_players=ranked_players, players=players, title="Waterpolo Players")
 
@@ -51,6 +50,7 @@ def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
     cur.execute('SELECT DISTINCT tournament_name, description, logo FROM Tournament;')
+    #FIX
     tournaments = cur.fetchall()
     return render_template("tournaments.html", tournaments=tournaments, title="Waterpolo Players")
 
@@ -62,7 +62,11 @@ def indiv_tournament(id):
 
 @app.route('/positions')
 def positions():
-    return render_template("______", title="Waterpolo Players") #return something
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Position;')
+    positions = cur.fetchall()
+    return render_template("positions.html", positions=positions, title="Waterpolo Players")
 
 
 @app.route('/position/<int:id>')
