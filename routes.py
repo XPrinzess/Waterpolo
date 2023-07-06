@@ -13,7 +13,7 @@ def home():
 def countries():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT * FROM Country')
+    cur.execute('SELECT * FROM Country;')
     countries = cur.fetchall()
     return render_template("countries.html", countries=countries, title="Waterpolo Players")
 
@@ -49,7 +49,7 @@ def indiv_player(id):
 def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT DISTINCT tournament_name, description, logo FROM Tournament;')
+    cur.execute('SELECT DISTINCT tournament_name, description, logo, logo_copyright FROM Tournament;')
     #FIX
     tournaments = cur.fetchall()
     return render_template("tournaments.html", tournaments=tournaments, title="Waterpolo Players")
