@@ -5,4 +5,8 @@
     <h2>{{item[0]}} <br/></h2> {{item[1]}} <img src = "{{item[2]}}"/> <br/> <caption>{{item[3]}}</caption>
 {% endfor %}
 
+{% for item in years %}
+    <h2><a href = "/year/{{item[0]}}"> {{item[0]}} </a>
+{% endfor %}
+
 {% endblock %}

@@ -50,9 +50,10 @@ def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
     cur.execute('SELECT DISTINCT tournament_name, description, logo, logo_copyright FROM Tournament;')
-    #FIX
     tournaments = cur.fetchall()
-    return render_template("tournaments.html", tournaments=tournaments, title="Waterpolo Players")
+    cur.execute('SELECT year FROM Tournament;')
+    years = cur.fetchall()
+    return render_template("tournaments.html", tournaments=tournaments, years=years, title="Waterpolo Players")
 
 
 @app.route('/tournament/<int:id>')
