@@ -24,7 +24,6 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchone()
-    #cur.execute('SELECT ') #finish query (part of iteration 2)
     return render_template("country.html", country=country, title="Waterpolo Players")
 
 

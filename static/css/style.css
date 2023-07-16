@@ -11,3 +11,7 @@ header h1 {
     width: 100%;
     background-color: rgb(216, 170, 238);
 }
+
+img {
+    width: 300px;
+}
