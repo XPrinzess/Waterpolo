@@ -24,7 +24,9 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchone()
-    return render_template("country.html", country=country, title="Waterpolo Players")
+    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ?', (id,))
+    country_players = cur.fetchall()
+    return render_template("country.html", country=country, country_players=country_players, title="Waterpolo Players")
 
 
 @app.route('/players')
