@@ -4,6 +4,12 @@ import sqlite3
 app = Flask(__name__)
 
 
+# use this function in the other functions to connect to the database
+#def connect():
+#    conn = sqlite3.connect('waterpolo.db')
+#    cur = conn.cursor()
+
+
 @app.route('/')
 def home():
     return render_template("home.html", title="Waterpolo Players") #title variable names the tab in the website
@@ -23,7 +29,7 @@ def indiv_country(id):
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
-    country = cur.fetchone()
+    country = cur.fetchall()
     cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ?', (id,))
     country_players = cur.fetchall()
     return render_template("country.html", country=country, country_players=country_players, title="Waterpolo Players")
@@ -43,7 +49,11 @@ def players():
 
 @app.route('/player/<int:id>')
 def indiv_player(id):
-    return render_template("______", title="Waterpolo Players") #return something
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Player WHERE id = ?', (id,))
+    player = cur.fetchall()
+    return render_template("player.html", player=player, title="Waterpolo Players")
 
 
 @app.route('/tournaments')
