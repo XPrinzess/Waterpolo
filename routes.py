@@ -83,7 +83,11 @@ def positions():
 
 @app.route('/position/<int:id>')
 def indiv_position(id):
-    return render_template("______", title="Waterpolo Players") #return something
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Player_position WHERE id = ?', (id,)) #get correct query
+    position = cur.fetchall()
+    return render_template("position.html", position=position, title="Waterpolo Players")
 
 
 if __name__ == "__main__":

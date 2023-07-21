@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% for item in player %}
+    <h2> {{item[1]}} {{item[2]}} <img src = "{{item[3]}}"/> {{item[4]}} {{item[5]}} {{item[6]}} {{item[7]}} {{item[8]}} </h2>
+{% endfor %}
+
+{% endblock %}
