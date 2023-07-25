@@ -85,9 +85,11 @@ def positions():
 def indiv_position(id):
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT Position.position, Position.image, Position.pos_copyright, Player.first_name, Player.last_name, Player.image FROM PlayerPosition Join Player ON PlayerPosition.player_id=Player.id Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
+    cur.execute('SELECT Position.position, Position.image, Position.pos_copyright FROM Position WHERE Position.id = ?', (id,))
     position = cur.fetchall()
-    return render_template("position.html", position=position, title="Waterpolo Players")
+    cur.execute('SELECT Player.first_name, Player.last_name, Player.image, country.flag FROM PlayerPosition Join Player ON PlayerPosition.player_id=Player.id Join Country ON Player.country_id=Country.id Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
+    position_players = cur.fetchall()
+    return render_template("position.html", position=position, position_players=position_players, title="Waterpolo Players")
 
 
 if __name__ == "__main__":
