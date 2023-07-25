@@ -85,7 +85,7 @@ def positions():
 def indiv_position(id):
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT * FROM Player_position WHERE id = ?', (id,)) #get correct query
+    cur.execute('SELECT Position.position, Position.image, Position.pos_copyright, Player.first_name, Player.last_name, Player.image FROM PlayerPosition Join Player ON PlayerPosition.player_id=Player.id Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
     position = cur.fetchall()
     return render_template("position.html", position=position, title="Waterpolo Players")
 
