@@ -5,14 +5,14 @@ app = Flask(__name__)
 
 
 # use this function in the other functions to connect to the database
-#def connect():
+# def connect():
 #    conn = sqlite3.connect('waterpolo.db')
 #    cur = conn.cursor()
 
 
 @app.route('/')
 def home():
-    return render_template("home.html", title="Waterpolo Players") #title variable names the tab in the website
+    return render_template("home.html", title="Waterpolo Players")  # title variable names the tab in the website
 
 
 @app.route('/countries')
@@ -43,7 +43,7 @@ def players():
     ranked_players = cur.fetchall()
     cur.execute('SELECT Player.id, Player.first_name, Player.last_name, Player.image, Country.flag FROM Player Join Country ON Player.country_id=Country.id WHERE Player.world_ranking IS NULL;')
     players = cur.fetchall()
-    #world ranking still required in further iterations (could have interaction from the user how they want the data ordered)
+    # world ranking still required in further iterations (could have interaction from the user how they want the data ordered)
     return render_template("players.html", ranked_players=ranked_players, players=players, title="Waterpolo Players")
 
 
@@ -61,9 +61,11 @@ def indiv_player(id):
 def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT DISTINCT tournament_name, description, logo, logo_copyright FROM Tournament;')
+    cur.execute('SELECT DISTINCT tournament_name FROM Tournament;')
     tournaments = cur.fetchall()
-    cur.execute('SELECT year FROM Tournament;')
+
+    cur.execute('SELECT year FROM Tournament WHERE id=?', (tournaments),)  # fix
+
     years = cur.fetchall()
     return render_template("tournaments.html", tournaments=tournaments, years=years, title="Waterpolo Players")
 
