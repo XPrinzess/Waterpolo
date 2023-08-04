@@ -63,10 +63,12 @@ def tournaments():
     cur = conn.cursor()
     cur.execute('SELECT DISTINCT tournament_name FROM Tournament;')
     tournaments = cur.fetchall()
-
-    cur.execute('SELECT year FROM Tournament WHERE id=?', (tournaments),)  # fix
-
-    years = cur.fetchall()
+    
+    for tournament in tournaments:
+        cur.execute('SELECT tournament_name, year FROM Tournament WHERE tournament_name=?', (tournament[0]))
+    # many to many er diagram
+    # change database
+    years = cur.fetchone()
     return render_template("tournaments.html", tournaments=tournaments, years=years, title="Waterpolo Players")
 
 
