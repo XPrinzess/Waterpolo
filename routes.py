@@ -61,14 +61,14 @@ def indiv_player(id):
 def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT DISTINCT tournament_name FROM Tournament;')
+    cur.execute('SELECT DISTINCT tournament_name, description, logo FROM Tournament;')
     tournaments = cur.fetchall()
-    
-    for tournament in tournaments:
-        cur.execute('SELECT tournament_name, year FROM Tournament WHERE tournament_name=?', (tournament[0]))
-    # many to many er diagram
-    # change database
-    years = cur.fetchone()
+
+    # change sqlite database (after checking that er diagram #8 is correct)
+    # write query for tournaments page
+
+    cur.execute('SELECT year FROM Tournament;')
+    years = cur.fetchall()
     return render_template("tournaments.html", tournaments=tournaments, years=years, title="Waterpolo Players")
 
 
