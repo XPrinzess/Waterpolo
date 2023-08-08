@@ -2,18 +2,35 @@
 {% block content %}
 
 {% for item in player %}
-    <h2> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/> <br> 
-        {{item[0]}} {{item[1]}} plays waterpolo for {{item[7]}} National Waterpolo Team.
+    <h2> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/> <br>
+
+    {% if item[11] %}
+        {{item[0]}} {{item[1]}} currently plays waterpolo for the {{item[7]}} National Waterpolo Team.
+    {% else %}
+        {{item[0]}} {{item[1]}} used to play waterpolo for the {{item[7]}} National Waterpolo Team.
+    {% endif %}
+        
         She is {{item[4]}}cm tall and weighs {{item[3]}}kg.
-        <br><br>
+        <br>
     
-    {% if item[5] <!-- what condition can be used?? --> %}  
+    {% if item[5] %}  
+        <br>
         She is ranked #{{item[5]}} out of the best 10 female waterpolo players in the world.
+        <br>
     {% endif %}
     
-        <br><br>
+        <br>
         Most of the time she plays as cap number {{item[6]}}. <br>
-        <a href = "/player/{{item[0]}}"> {{item[7]}}</a> <br> <img src = "{{item[8]}}"/> </h2>
+
+    {% if item[9] and item[10] %}
+        {{item[1]}} is ambidextrous, meaning that she uses both her left and right hand equally well. <br>
+    {% elif item[9] %}
+        {{item[1]}} is right hand dominant. <br>
+    {% else %}
+        {{item[1]}} is left hand dominant. <br>
+    {% endif %}
+
+        <a href = "/player/{{item[0]}}"> <img src = "{{item[8]}}"/> </h2> </a>
 {% endfor %}
 
 {% endblock %}

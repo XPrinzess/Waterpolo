@@ -2,7 +2,7 @@
 {% block content %}
 
 {% for item in ranked_players %}
-    <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/> {{item[4]}} </h2>
+    <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/> Female World #{{item[4]}} </h2>
     <img src = "{{item[3]}}"/><img src = "{{item[5]}}"/>
 {% endfor %}
 
