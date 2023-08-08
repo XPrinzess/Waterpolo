@@ -5,9 +5,17 @@
     <h2> {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
 {% endfor %}
 
-{% for item in country_players %}
+<!-- {% for item in country_players %}
     <h2><a href = "/player/{{item[0]}}"> {{item[0]}} {{item[1]}} </a><br/>
     <img src = "{{item[2]}}"/> {{item[3]}} </h2>
+{% endfor %} -->
+
+{% for item in national_team %}
+    <h2> National Team: <br> {{item[0]}} {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
+{% endfor %}
+
+{% for item in former_team %}
+    <h2> Former Team: <br> {{item[0]}} {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
 {% endfor %}
 
 {% endblock %}

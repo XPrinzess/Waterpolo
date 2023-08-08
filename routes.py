@@ -30,9 +30,12 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
-    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ?', (id,))
-    country_players = cur.fetchall()
-    return render_template("country.html", country=country, country_players=country_players, title="Waterpolo Players")
+    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ? AND national_team = 1', (id,))
+    national_team = cur.fetchall()
+    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ? AND national_team = 0', (id,))
+    former_team = cur.fetchall()
+    #get template to only print 'former team' or 'national team' once
+    return render_template("country.html", country=country, national_team=national_team, former_team=former_team, title="Waterpolo Players")
 
 
 @app.route('/players')
