@@ -54,7 +54,7 @@ def players():
 def indiv_player(id):
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT Player.first_name, Player.last_name, Player.image, Player.weight, Player.height, Player.world_ranking, Player.cap_number, Player.total_goals, Country.country, Country.flag FROM Player JOIN Country ON Player.country_id=Country.id WHERE Player.id = ?', (id,))
+    cur.execute('SELECT Player.first_name, Player.last_name, Player.image, Player.weight, Player.height, Player.world_ranking, Player.cap_number, Country.country, Country.flag FROM Player JOIN Country ON Player.country_id=Country.id WHERE Player.id = ?', (id,))
     #use if else statement to process the numbers for dominant hand and national team
     player = cur.fetchall()
     return render_template("player.html", player=player, title="Waterpolo Players")
