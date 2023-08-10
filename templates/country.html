@@ -11,7 +11,8 @@
 {% endfor %} -->
 
 {% for item in national_team %}
-    <h2> National Team: <br> {{item[0]}} {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
+    <h2> National Team: <br>
+    <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/></a> </h2> <br/>
 {% endfor %}
 
 {% for item in former_team %}

@@ -30,9 +30,9 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
-    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ? AND national_team = 1', (id,))
+    cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player WHERE country_id = ? AND national_team = 1', (id,))
     national_team = cur.fetchall()
-    cur.execute('SELECT first_name, last_name, image, national_team FROM Player WHERE country_id = ? AND national_team = 0', (id,))
+    cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player WHERE country_id = ? AND national_team = 0', (id,))
     former_team = cur.fetchall()
     #get template to only print 'former team' or 'national team' once
     return render_template("country.html", country=country, national_team=national_team, former_team=former_team, title="Waterpolo Players")
@@ -94,7 +94,7 @@ def indiv_position(id):
     cur = conn.cursor()
     cur.execute('SELECT Position.position, Position.image, Position.pos_copyright FROM Position WHERE Position.id = ?', (id,))
     position = cur.fetchall()
-    cur.execute('SELECT Player.first_name, Player.last_name, Player.image, country.flag FROM PlayerPosition Join Player ON PlayerPosition.player_id=Player.id Join Country ON Player.country_id=Country.id Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
+    cur.execute('SELECT Player.first_name, Player.last_name, Player.image, Country.flag, Player.id FROM PlayerPosition Join Player ON PlayerPosition.player_id=Player.id Join Country ON Player.country_id=Country.id Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
     position_players = cur.fetchall()
     return render_template("position.html", position=position, position_players=position_players, title="Waterpolo Players")
 
