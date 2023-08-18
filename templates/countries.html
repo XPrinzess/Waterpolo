@@ -2,7 +2,7 @@
 {% block content %}
 
 {% for item in countries %}
-    <h2><a href = "/country/{{item[0]}}"> {{item[1]}} </a> <br/> </h2> <img src = "{{item[2]}}"/>
+    <h2><a href = "/country/{{item[0]}}"> {{item[1]}} <br/> <img src = "{{item[2]}}"/> </a> </h2>
 {% endfor %}
 
 {% endblock %}

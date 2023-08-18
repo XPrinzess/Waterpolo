@@ -63,15 +63,21 @@ def indiv_player(id):
 def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    cur.execute('SELECT DISTINCT tournament_name, description, logo FROM Tournament;')
-    tournaments = cur.fetchall()
+    
+    #maybe put a loop around this
+    #cur.execute('SELECT DISTINCT name_id FROM Tournament')
 
-    # change sqlite database (after checking that er diagram #8 is correct)
-    # write query for tournaments page
+    cur.execute('SELECT DISTINCT name_id FROM Tournament')
+    tid = cur.fetchall()
+    print(tid)
 
-    cur.execute('SELECT year FROM Tournament;')
-    years = cur.fetchall()
-    return render_template("tournaments.html", tournaments=tournaments, years=years, title="Waterpolo Players")
+    tournaments =[]
+    for x in tid:
+        cur.execute('SELECT Tournament.year, TournamentName.tournament_name, TournamentName.description, TournamentName.logo FROM Tournament JOIN TournamentName ON Tournament.name_id=TournamentName.id WHERE Tournament.name_id=?', (x))
+        tournament = cur.fetchall()
+        tournaments.append(tournament)
+
+    return render_template("tournaments.html", tournaments=tournaments, title="Waterpolo Players")
 
 
 @app.route('/tournament/<int:id>')

@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% for item in tournaments %}
-    <h2>{{item[0]}} <br> {{item[1]}} <br> <img src = "{{item[2]}}"/> </h2>
-{% endfor %}
-
-{% for item in years %}
-    <h2>{{item[0]}} <br> </h2>
+{% for tournament in tournaments %}
+    <h2>{{tournament[0][1]}} <br> {{tournament[0][2]}} <br> <img src = "{{tournament[0][3]}}"/> </h2>
+    {% for year in tournament %}
+        {{year[0]}}<br>
+    {% endfor %}
 {% endfor %}
 
 {% endblock %}
