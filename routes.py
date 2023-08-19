@@ -63,26 +63,23 @@ def indiv_player(id):
 def tournaments():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
-    
-    #maybe put a loop around this
-    #cur.execute('SELECT DISTINCT name_id FROM Tournament')
-
     cur.execute('SELECT DISTINCT name_id FROM Tournament')
     tid = cur.fetchall()
-    print(tid)
-
     tournaments =[]
-    for x in tid:
-        cur.execute('SELECT Tournament.year, TournamentName.tournament_name, TournamentName.description, TournamentName.logo FROM Tournament JOIN TournamentName ON Tournament.name_id=TournamentName.id WHERE Tournament.name_id=?', (x))
+    for name in tid:
+        cur.execute('SELECT Tournament.year, TournamentName.tournament_name, TournamentName.description, TournamentName.logo, Tournament.id FROM Tournament JOIN TournamentName ON Tournament.name_id=TournamentName.id WHERE Tournament.name_id=?', (name))
         tournament = cur.fetchall()
         tournaments.append(tournament)
-
     return render_template("tournaments.html", tournaments=tournaments, title="Waterpolo Players")
 
 
-@app.route('/tournament/<int:id>')
-def indiv_tournament(id):
-    return render_template("______", title="Waterpolo Players") #return something
+@app.route('/tournament/<int:name_id>')
+def indiv_tournament(name_id):
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Tournament WHERE name_id = ?', (name_id,))
+    year = cur.fetchall()
+    return render_template("tournament.html", year=year, title="Waterpolo Players")
 
 
 @app.route('/positions')

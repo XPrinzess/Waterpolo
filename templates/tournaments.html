@@ -4,7 +4,7 @@
 {% for tournament in tournaments %}
     <h2>{{tournament[0][1]}} <br> {{tournament[0][2]}} <br> <img src = "{{tournament[0][3]}}"/> </h2>
     {% for year in tournament %}
-        {{year[0]}}<br>
+    <a href = "/tournament/{{tournament[0][4]}}"> {{year[0]}} </a> <br>
     {% endfor %}
 {% endfor %}
 
