@@ -94,7 +94,7 @@ def tournaments():
                            title="Waterpolo Players")
 
 
-@app.route('/tournament/<int:name_id>')
+@app.route('/tournament/<int:name_id>/<int:year>')
 def indiv_tournament(name_id, year):
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
@@ -103,7 +103,7 @@ def indiv_tournament(name_id, year):
                 JOIN TournamentName ON Tournament.name_id=TournamentName.id \
                 WHERE Tournament.name_id = ? AND Tournament.year = ?', (name_id, year,))
     event = cur.fetchall()
-    cur.execute('SELECT id, country, flag FROM COUNTRY \
+    cur.execute('Country.id, Country.country, Country.flag, Tournament.name_id, Tournament.year FROM CountryTournament \
                 JOIN Country ON CountryTournament.country_id=Country.id \
                 JOIN Tournament ON CountryTournament.tournament_id=Tournament.id \
                 WHERE Tournament.name_id = ? AND Tournament.year = ?', (name_id, year,))
