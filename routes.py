@@ -103,7 +103,7 @@ def indiv_tournament(name_id, year):
                 JOIN TournamentName ON Tournament.name_id=TournamentName.id \
                 WHERE Tournament.name_id = ? AND Tournament.year = ?', (name_id, year,))
     event = cur.fetchall()
-    cur.execute('Country.id, Country.country, Country.flag, Tournament.name_id, \
+    cur.execute('SELECT Country.id, Country.country, Country.flag, Tournament.name_id, \
                 Tournament.year FROM CountryTournament \
                 JOIN Country ON CountryTournament.country_id=Country.id \
                 JOIN Tournament ON CountryTournament.tournament_id=Tournament.id \

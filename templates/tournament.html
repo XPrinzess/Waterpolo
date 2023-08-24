@@ -2,11 +2,11 @@
 {% block content %}
 
 {% for item in event %}
-    <h2> {{item[0]}} {{item[1]}} <img src ="{{item[2]}}"> {{item[4]}} {{item[5]}} </h2>
+    <h2> {{item[4]}} {{item[0]}} <br> <img src ="{{item[2]}}"> <br> {{item[1]}} <br> Matches: {{item[5]}} </h2>
 {% endfor %}
 
 {% for item in teams %}
-    <h2> {{item[1]}} <img src ="{{item[2]}}"> </h2>
+    <h2> {{item[1]}} <br> <img src ="{{item[2]}}"> </h2>
 {% endfor %}
 
 {% endblock %}
