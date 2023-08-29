@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 import sqlite3
 
 app = Flask(__name__)
@@ -32,6 +32,8 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
+    if country == []:
+        abort(404)
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 1', (id,))
     national_team = cur.fetchall()
@@ -73,6 +75,8 @@ def indiv_player(id):
                 JOIN Country ON Player.country_id=Country.id \
                 WHERE Player.id = ?', (id,))
     player = cur.fetchall()
+    if player == []:
+        abort(404)
     return render_template("player.html", player=player, title="Waterpolo Players")
 
 
@@ -103,6 +107,8 @@ def indiv_tournament(name_id, year):
                 JOIN TournamentName ON Tournament.name_id=TournamentName.id \
                 WHERE Tournament.name_id = ? AND Tournament.year = ?', (name_id, year,))
     event = cur.fetchall()
+    if event == []:
+        abort(404)
     cur.execute('SELECT Country.id, Country.country, Country.flag, Tournament.name_id, \
                 Tournament.year FROM CountryTournament \
                 JOIN Country ON CountryTournament.country_id=Country.id \
@@ -130,6 +136,8 @@ def indiv_position(id):
     cur.execute('SELECT Position.position, Position.image, Position.pos_copyright FROM Position \
                 WHERE Position.id = ?', (id,))
     position = cur.fetchall()
+    if position == []:
+        abort(404)
     cur.execute('SELECT Player.first_name, Player.last_name, Player.image, Country.flag, Player.id FROM PlayerPosition \
                 Join Player ON PlayerPosition.player_id=Player.id \
                 Join Country ON Player.country_id=Country.id \
@@ -137,6 +145,11 @@ def indiv_position(id):
     position_players = cur.fetchall()
     return render_template("position.html", position=position, position_players=position_players, 
                            title="Waterpolo Players")
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("error404.html"), 404
 
 
 if __name__ == "__main__":

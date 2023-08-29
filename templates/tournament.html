@@ -6,7 +6,7 @@
 {% endfor %}
 
 {% for item in teams %}
-    <h2> {{item[1]}} <br> <img src ="{{item[2]}}"> </h2>
+    <h2> {{item[1]}} <br> <a href = "/country/{{item[0]}}"> <img src ="{{item[2]}}"> </a> </h2>
 {% endfor %}
 
 {% endblock %}
