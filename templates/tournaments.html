@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
 {% for tournament in tournaments %}
     <h2>{{tournament[0][1]}} <br> {{tournament[0][2]}} <br> <img src = "{{tournament[0][3]}}"/> </h2>
     {% for year in tournament %}

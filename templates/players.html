@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% for item in ranked_players %}
-    <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/> Female World #{{item[4]}} </h2>
-    <img src = "{{item[3]}}"/><img src = "{{item[5]}}"/>
-{% endfor %}
+<div class="row">
+    {% for item in ranked_players %}
+    <div class="column">
+        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/> Female World #{{item[4]}} </h2>
+        <img src = "{{item[3]}}"/><img src = "{{item[5]}}"/>
+    </div>
+    {% endfor %}
+</div>
 
-{% for item in players %}
-    <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/></h2>
-    <img src = "{{item[3]}}"/><img src = "{{item[4]}}"/>
-{% endfor %}
+<div class="row">
+    {% for item in players %}
+    <div class="column">
+        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/></h2>
+        <img src = "{{item[3]}}"/><img src = "{{item[4]}}"/>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
