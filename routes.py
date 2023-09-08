@@ -5,23 +5,29 @@ app = Flask(__name__)
 
 
 # use this function in the other functions to connect to the database
-# def connect():
-#    conn = sqlite3.connect('waterpolo.db')
-#    cur = conn.cursor()
+def connect(query):
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute(query)
+    global result
+    result = cur.fetchall()
+    return result
 
 
-@app.route('/')
+@app.route('/') # ending to URL link that displays this 'home' function
 def home():
+    # returns the corresponding html template and the title variable names the tab in the website
     return render_template("home.html", title="Waterpolo Players")
-    # title variable names the tab in the website
 
 
 @app.route('/countries')
 def countries():
-    conn = sqlite3.connect('waterpolo.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Country;')
-    countries = cur.fetchall()
+    connect('SELECT * FROM Country')
+    #conn = sqlite3.connect('waterpolo.db')
+    #cur = conn.cursor()
+    #cur.execute('SELECT * FROM Country;')
+    #countries = cur.fetchall()
+    countries = result
     return render_template("countries.html", countries=countries, 
                            title="Waterpolo Players")
 

@@ -1,22 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
 {% for item in country %}
-    <h2> {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
+    <h2> {{item[1]}} </h2> <img src ="{{item[2]}}"> <br/>
 {% endfor %}
 
-<!-- {% for item in country_players %}
-    <h2><a href = "/player/{{item[0]}}"> {{item[0]}} {{item[1]}} </a><br/>
-    <img src = "{{item[2]}}"/> {{item[3]}} </h2>
-{% endfor %} -->
 
+<h2> Current National Team: <br> </h2>
 {% for item in national_team %}
-    <h2> National Team: <br>
-    <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/></a> </h2> <br/>
+    <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"> </a> </h2> <br/>
 {% endfor %}
 
+<h2> Former Team Members: <br> </h2>
 {% for item in former_team %}
-    <h2> Former Team: <br> {{item[0]}} {{item[1]}} </h2> <img src ="{{item[2]}}"><br/>
+    <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src ="{{item[2]}}"> </a> </h2> <br/>
 {% endfor %}
 
 {% endblock %}
