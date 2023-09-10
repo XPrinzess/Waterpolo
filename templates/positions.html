@@ -2,14 +2,14 @@
 {% block content %}
 
 {% for item in positions %}
-    <h2><a href = "/position/{{item[0]}}"> {{item[1]}} </a> <br/> </h2> Position #{{item[0]}} <br/> {{item[2]}} <br/>
+    <h2><a href = "/position/{{item[0]}}"> {{item[1]}} </a> <br> </h2> Position #{{item[0]}} <br> {{item[2]}} <br>
     <div class="overlay">
         <img src = "{{item[3]}}"/>
         <div class="hovercaption"> 
             <p>{{item[4]}}</p>
         </div>
     </div>
-    <br/> 
+    <br> 
 {% endfor %}
 
 

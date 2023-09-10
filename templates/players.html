@@ -4,7 +4,7 @@
 <div class="row">
     {% for item in ranked_players %}
     <div class="column">
-        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a><br/> Female World #{{item[4]}} </h2>
+        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a> <br> Female World #{{item[4]}} </h2>
         <img src = "{{item[3]}}"/><img src = "{{item[5]}}"/>
     </div>
     {% endfor %}
@@ -13,7 +13,7 @@
 <div class="row">
     {% for item in players %}
     <div class="column">
-        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} <br/>
+        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} <br>
         <img src = "{{item[3]}}"/></a> <img src = "{{item[4]}}"/> </h2>
     </div>
     {% endfor %}

@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
+
 {% for item in event %}
     <h2> {{item[4]}} {{item[0]}} <br> <img src ="{{item[2]}}"> <br> {{item[1]}} <br> Matches: {{item[5]}} </h2>
 {% endfor %}

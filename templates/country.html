@@ -1,20 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="main">
+    <div class="back"> <button onclick="history.back()"> <h2> &laquo;Back </h2> </button> </div>
 
+    <div class="container">
+        <div class="subheading">
+            <div class="row">
+                {% for item in country %}
+                <div class="column">
+                    <h2> {{item[1]}} </h2> <img src ="{{item[2]}}">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
 
-{% for item in country %}
-    <h2> {{item[1]}} </h2> <img src ="{{item[2]}}"> <br/>
-{% endfor %}
+        <div class="subheading"> <h2> Current National Team: </h2> </div>
+        <div class="row">
+            {% for item in national_team %}
+            <div class="column">
+                <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"> </a> </h2>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
 
+        <div class="subheading"> <h2> Former Team Members: </h2> </div>
+        <div class="row">
+            {% for item in former_team %}
+            <div class="column">
+                <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src ="{{item[2]}}"> </a> </h2>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 
-<h2> Current National Team: <br> </h2>
-{% for item in national_team %}
-    <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"> </a> </h2> <br/>
-{% endfor %}
-
-<h2> Former Team Members: <br> </h2>
-{% for item in former_team %}
-    <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src ="{{item[2]}}"> </a> </h2> <br/>
-{% endfor %}
+    <div class="invisible">
+        <h2> hidden </h2>
+    </div>
+</div>
 
 {% endblock %}

@@ -5,29 +5,35 @@ app = Flask(__name__)
 
 
 # use this function in the other functions to connect to the database
-def connect(query):
-    conn = sqlite3.connect('waterpolo.db')
+#def connect(query):
+    #conn = sqlite3.connect('waterpolo.db')
+    #cur = conn.cursor()
+    #cur.execute(query)
+    #global result
+    #result = cur.fetchall()
+    #return result
+
+def connect(query, id): #SAISSHAS WAY
+    conn = sqlite3.connect("waterpolo.db")
     cur = conn.cursor()
     cur.execute(query)
-    global result
-    result = cur.fetchall()
-    return result
+    results = cur.fetchall()
+    return results
 
 
-@app.route('/') # ending to URL link that displays this 'home' function
+@app.route('/')  # ending to URL link that displays this 'home' function
 def home():
-    # returns the corresponding html template and the title variable names the tab in the website
+    # returns the corresponding html template and the title variable names the tab in the browser
     return render_template("home.html", title="Waterpolo Players")
 
 
 @app.route('/countries')
 def countries():
-    connect('SELECT * FROM Country')
-    #conn = sqlite3.connect('waterpolo.db')
-    #cur = conn.cursor()
-    #cur.execute('SELECT * FROM Country;')
-    #countries = cur.fetchall()
-    countries = result
+    # conn = sqlite3.connect('waterpolo.db')
+    # cur = conn.cursor()
+    # cur.execute('SELECT * FROM Country;')
+    # countries = cur.fetchall()
+    countries = connect('SELECT * FROM Country') #SAISSHAS WAY
     return render_template("countries.html", countries=countries, 
                            title="Waterpolo Players")
 
@@ -38,15 +44,14 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
-    if country == []:
-        abort(404)
+    if country == []:  # if there is no result from the SQL query, the list will be empty
+        abort(404)  # calls the error404 function which redirects the user to the error404 page
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 1', (id,))
     national_team = cur.fetchall()
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 0', (id,))
     former_team = cur.fetchall()
-    #get template to only print 'former team' or 'national team' once
     return render_template("country.html", country=country, national_team=national_team, 
                            former_team=former_team, title="Waterpolo Players")
 
