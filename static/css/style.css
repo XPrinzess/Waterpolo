@@ -38,8 +38,10 @@ a:hover, a:active {
     overflow: hidden;
     background-color: rgb(255,182,193);
     position: sticky;
+    z-index: 1;
     top: 0;
 }
+
 
 .nav a:link {
     float: left;
@@ -57,20 +59,24 @@ a:hover, a:active {
 
 .main {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    margin: auto;
     overflow: hidden;
+    
 }
 
 
 .container {
     background-color: rgb(255,182,193);
-    margin: 80px;
+    margin: auto;
+    width: 80%;
     margin-top: 25px;
 }
 
 
 .back {
     text-decoration: none;
+    position: absolute;
     > button h2 {
         font-size: 15px;
     }
@@ -93,10 +99,6 @@ a:hover, a:active {
 }
 
 
-.invisible {
-    visibility: hidden
-}
-
 .subheading {
     display: flex;
     justify-content: center;
@@ -116,6 +118,11 @@ a:hover, a:active {
 
 
 .column h2 {
+    text-align: center;
+}
+
+
+.column h3 {
     text-align: center;
 }
 
@@ -147,20 +154,21 @@ a:hover, a:active {
 }
 
 
-.mySlidesfade {
+.slidesfade {
     display: none;
 }
 
 .photo img {
     vertical-align: middle;
-    width: 900px;
-    height: 600px;
+    width: 1000px;
+    height: 667px;
 }
 
 .slideshow-container {
     max-width: 1000px;
     position: relative;
     margin: auto;
+    margin-top: 25px;
 }
 
 /* Next & previous buttons */
@@ -177,6 +185,7 @@ a:hover, a:active {
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+    background-color: rgba(0,0,0,0.5);
 }
   
 /* Position the "next button" to the right */
@@ -191,14 +200,14 @@ a:hover, a:active {
 }
   
 /* Caption text */
-.text {
+.copyright {
     color: #f2f2f2;
     background: rgba(0, 0, 0, 0.5);
     font-size: 15px;
-    padding: 8px 12px;
+    padding: 10px 0px;
     position: absolute;
-    bottom: 8px;
-    width: 100%;
+    bottom: 0px;
+    width: 1000px;
     text-align: center;
 }
   
@@ -217,14 +226,14 @@ a:hover, a:active {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #bbb;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
 }
   
 .active, .dot:hover {
-    background-color: #717171;
+    background-color: rgba(0,0,0,0.8);
 }
   
 /* Fading animation */
@@ -237,8 +246,27 @@ a:hover, a:active {
     from {opacity: .4} 
     to {opacity: 1}
 }
+
+
+.image-stack::after {
+    content: ' ';
+    display: table;
+    clear: both;
+}
   
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-    .prev, .next,.text {font-size: 11px}
+.image-stack_bottom {
+    align-items: center;
+    padding-top: 0%;
+}
+  
+.image-stack_flag {
+  float: left;
+  position: relative;
+  margin-left: 0%;
+  margin-top: -16%;
+  z-index: 1;
+  > img {
+    width: 77.5px;
+    height: 45px;
+  }
 }

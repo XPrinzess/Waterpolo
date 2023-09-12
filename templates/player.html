@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
+
+{% block title %}
+<div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
+{% endblock %}
+
 {% block content %}
 
-<div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
-
 {% for item in player %}
+
     <h2> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/> <br>
 
     {% if item[11] %}

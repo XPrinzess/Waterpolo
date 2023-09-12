@@ -9,7 +9,12 @@
             {% include "header.html" %}
         </header>
         {% include "nav.html" %}
-        {% block content %}{% endblock %}
+        {% block title %}{% endblock %} <!-- for back button -->
+        <div class="main">
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
         {% include "footer.html" %}
         <script src="/static/js/interact.js"></script>
     </body>

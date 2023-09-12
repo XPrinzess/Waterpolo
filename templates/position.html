@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
-{% block content %}
 
+{% block title %}
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
+{% endblock %}
+
+{% block content %}
 
 {% for item in position %}
     <h2> {{item[0]}} Players <br> <img src ="{{item[1]}}"> <br> {{item[2]}} </h2>

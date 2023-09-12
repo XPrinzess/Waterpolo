@@ -21,19 +21,21 @@ def connect(query, id): #SAISSHAS WAY
     return results
 
 
-@app.route('/')  # ending to URL link that displays this 'home' function
+@app.route('/')  #  app.route maps the URL to this function
+#  ending to URL link that displays this 'home' function
 def home():
-    # returns the corresponding html template and the title variable names the tab in the browser
+    # returns the corresponding html template
+    # the title variable names the tab in the browser
     return render_template("home.html", title="Waterpolo Players")
 
 
 @app.route('/countries')
 def countries():
-    # conn = sqlite3.connect('waterpolo.db')
-    # cur = conn.cursor()
-    # cur.execute('SELECT * FROM Country;')
-    # countries = cur.fetchall()
-    countries = connect('SELECT * FROM Country') #SAISSHAS WAY
+    conn = sqlite3.connect('waterpolo.db')
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Country;')
+    countries = cur.fetchall()
+    #  countries = connect('SELECT * FROM Country') #SAISSHAS WAY
     return render_template("countries.html", countries=countries, 
                            title="Waterpolo Players")
 
@@ -44,8 +46,8 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
-    if country == []:  # if there is no result from the SQL query, the list will be empty
-        abort(404)  # calls the error404 function which redirects the user to the error404 page
+    if country == []:  #  empty list if no result from SQL query
+        abort(404)  #  calls the error404 function
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 1', (id,))
     national_team = cur.fetchall()
@@ -60,17 +62,19 @@ def indiv_country(id):
 def players():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
+    # SQL query for getting the top 10 female players in the world
     cur.execute('SELECT Player.id, Player.first_name, Player.last_name, \
                 Player.image, Player.world_ranking, Country.flag FROM Player \
                 Join Country ON Player.country_id=Country.id \
-                WHERE Player.world_ranking IS NOT NULL;')
+                WHERE Player.world_ranking IS NOT NULL \
+                ORDER BY Player.world_ranking asc;')
     ranked_players = cur.fetchall()
+    # SQL query for getting the rest of the players in the database
     cur.execute('SELECT Player.id, Player.first_name, Player.last_name, \
                 Player.image, Country.flag FROM Player \
                 Join Country ON Player.country_id=Country.id \
                 WHERE Player.world_ranking IS NULL;')
     players = cur.fetchall()
-    # world ranking still required in further iterations (could have interaction from the user how they want the data ordered)
     return render_template("players.html", ranked_players=ranked_players, 
                            players=players, title="Waterpolo Players")
 
@@ -128,13 +132,14 @@ def indiv_tournament(name_id, year):
     teams = cur.fetchall()
     return render_template("tournament.html", event=event, teams=teams, 
                            title="Waterpolo Players")
-# Check all the queries work change the variables for the ?'s so that it works
+#  there is a data integrety issue
 
 
 @app.route('/positions')
 def positions():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
+    # selects all the information from the Position table
     cur.execute('SELECT * FROM Position;')
     positions = cur.fetchall()
     return render_template("positions.html", positions=positions, title="Waterpolo Players")
@@ -159,6 +164,8 @@ def indiv_position(id):
 
 
 @app.errorhandler(404)
+#  app.errorhandler handles invalid route errors
+#  the 404 specifies that the error is a page not found error
 def page_not_found(error):
     return render_template("error404.html"), 404
 

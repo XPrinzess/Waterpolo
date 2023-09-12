@@ -1,14 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        {% for item in countries %}
-        <div class="column">
-            <h2><a href = "/country/{{item[0]}}"> {{item[1]}} <br> <img src = "{{item[2]}}"/> </a></h2>
-        </div>
-        {% endfor %}
+
+<div class="row">
+    {% for item in countries %}
+    <div class="column">
+        <h2><a href = "/country/{{item[0]}}"> {{item[1]}} <br> <img src = "{{item[2]}}"/> </a></h2>
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
