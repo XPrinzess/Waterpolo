@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
+
+{% block title %}
+<div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
+{% endblock %}
+
 {% block content %}
-<h1> ERROR 404! </h1>
-<h2> This page does not exist. <br> Use the navigation bar to return to an existing page or click here to go back :)</h2>
+
+<div class="error">
+    <h1> ERROR 404! </h1>
+    <h2>This page does not exist.</h2>
+    <img src="/static/images/ball.jpg">
+</div>
 
 {% endblock %}

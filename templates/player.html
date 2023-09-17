@@ -7,36 +7,50 @@
 {% block content %}
 
 {% for item in player %}
+<h2>
+    <div class="subheading">
+        {{item[0]}} {{item[1]}} <br>
+    </div>
 
-    <h2> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"/> <br>
+    <div class="row">
+        <div class="column">
+            <div class="zoom">
+                <img src = "{{item[2]}}"/>
+                <a href = "/country/{{item[12]}}"> <img src = "{{item[8]}}"/> </a>
+            </div>
+        </div>
+    </div>
+</h2>
 
-    {% if item[11] %}
-        {{item[0]}} {{item[1]}} currently plays waterpolo for the {{item[7]}} National Waterpolo Team.
-    {% else %}
-        {{item[0]}} {{item[1]}} used to play waterpolo for the {{item[7]}} National Waterpolo Team.
-    {% endif %}
+    <div class="content">
+        <p>
+        {% if item[11] %}
+            {{item[0]}} {{item[1]}} currently plays waterpolo for the {{item[7]}} National Waterpolo Team.
+        {% else %}
+            {{item[0]}} {{item[1]}} used to play waterpolo for the {{item[7]}} National Waterpolo Team.
+        {% endif %}
+            
+            She is {{item[4]}}cm tall and weighs {{item[3]}}kg.
+            <br>
         
-        She is {{item[4]}}cm tall and weighs {{item[3]}}kg.
-        <br>
-    
-    {% if item[5] %}  
-        <br>
-        She is ranked #{{item[5]}} out of the best 10 female waterpolo players in the world.
-        <br>
-    {% endif %}
-    
-        <br>
-        Most of the time she plays as cap number {{item[6]}}. <br>
+        {% if item[5] %}  
+            <br>
+            She is ranked #{{item[5]}} out of the best 10 female waterpolo players in the world.
+            <br>
+        {% endif %}
+        
+            <br>
+            Most of the time she plays as cap number {{item[6]}}. <br>
 
-    {% if item[9] and item[10] %}
-        {{item[1]}} is ambidextrous, meaning that she uses both her left and right hand equally well. <br>
-    {% elif item[9] %}
-        {{item[1]}} is right hand dominant. <br>
-    {% else %}
-        {{item[1]}} is left hand dominant. <br>
-    {% endif %}
-
-        <a href = "/country/{{item[12]}}"> <img src = "{{item[8]}}"/> </a> </h2>
+        {% if item[9] and item[10] %}
+            <br> {{item[1]}} is ambidextrous, meaning that she uses both her left and right hand equally well. <br>
+        {% elif item[9] %}
+            <br> {{item[1]}} is right hand dominant. <br>
+        {% else %}
+            <br> {{item[1]}} is left hand dominant. <br>
+        {% endif %}
+        </p>
+    </div>
 {% endfor %}
 
 {% endblock %}

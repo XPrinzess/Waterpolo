@@ -13,10 +13,15 @@ app = Flask(__name__)
     #result = cur.fetchall()
     #return result
 
-def connect(query, id): #SAISSHAS WAY
+def connect(query, id, year):
     conn = sqlite3.connect("waterpolo.db")
     cur = conn.cursor()
-    cur.execute(query)
+    if id is not None and year is None:
+        cur.execute(query, id)
+    if id and year is not None:
+        cur.execute(query, id, year)
+    else:
+        cur.execute(query)
     results = cur.fetchall()
     return results
 
@@ -26,18 +31,14 @@ def connect(query, id): #SAISSHAS WAY
 def home():
     # returns the corresponding html template
     # the title variable names the tab in the browser
-    return render_template("home.html", title="Waterpolo Players")
+    return render_template("home.html", title="Women's Waterpolo")
 
 
 @app.route('/countries')
 def countries():
-    conn = sqlite3.connect('waterpolo.db')
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Country;')
-    countries = cur.fetchall()
-    #  countries = connect('SELECT * FROM Country') #SAISSHAS WAY
+    countries = connect('SELECT * FROM Country', None, None)
     return render_template("countries.html", countries=countries, 
-                           title="Waterpolo Players")
+                           title="Women's Waterpolo")
 
 
 @app.route('/country/<int:id>')
@@ -46,16 +47,21 @@ def indiv_country(id):
     cur = conn.cursor()
     cur.execute('SELECT * FROM Country WHERE id = ?', (id,))
     country = cur.fetchall()
+    #country = connect('SELECT * FROM Country WHERE id = ?', (id,), None)
     if country == []:  #  empty list if no result from SQL query
         abort(404)  #  calls the error404 function
+    #national_team = connect('SELECT first_name, last_name, image, national_team, player.id FROM Player \
+                #WHERE country_id = ? AND national_team = 1', (id,), None)
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 1', (id,))
     national_team = cur.fetchall()
+    #former_team = connect('SELECT first_name, last_name, image, national_team, player.id FROM Player \
+                #WHERE country_id = ? AND national_team = 0', (id,), None)
     cur.execute('SELECT first_name, last_name, image, national_team, player.id FROM Player \
                 WHERE country_id = ? AND national_team = 0', (id,))
     former_team = cur.fetchall()
     return render_template("country.html", country=country, national_team=national_team, 
-                           former_team=former_team, title="Waterpolo Players")
+                           former_team=former_team, title="Women's Waterpolo")
 
 
 @app.route('/players')
@@ -76,7 +82,7 @@ def players():
                 WHERE Player.world_ranking IS NULL;')
     players = cur.fetchall()
     return render_template("players.html", ranked_players=ranked_players, 
-                           players=players, title="Waterpolo Players")
+                           players=players, title="Women's Waterpolo")
 
 
 @app.route('/player/<int:id>')
@@ -90,9 +96,9 @@ def indiv_player(id):
                 JOIN Country ON Player.country_id=Country.id \
                 WHERE Player.id = ?', (id,))
     player = cur.fetchall()
-    if player == []:
+    if player == [] or id > 9223372036854775807:
         abort(404)
-    return render_template("player.html", player=player, title="Waterpolo Players")
+    return render_template("player.html", player=player, title="Women's Waterpolo")
 
 
 @app.route('/tournaments')
@@ -110,7 +116,7 @@ def tournaments():
         tournament = cur.fetchall()
         tournaments.append(tournament)
     return render_template("tournaments.html", tournaments=tournaments, 
-                           title="Waterpolo Players")
+                           title="Women's Waterpolo")
 
 
 @app.route('/tournament/<int:name_id>/<int:year>')
@@ -131,7 +137,7 @@ def indiv_tournament(name_id, year):
                 WHERE Tournament.name_id = ? AND Tournament.year = ?', (name_id, year,))
     teams = cur.fetchall()
     return render_template("tournament.html", event=event, teams=teams, 
-                           title="Waterpolo Players")
+                           title="Women's Waterpolo")
 #  there is a data integrety issue
 
 
@@ -140,9 +146,9 @@ def positions():
     conn = sqlite3.connect('waterpolo.db')
     cur = conn.cursor()
     # selects all the information from the Position table
-    cur.execute('SELECT * FROM Position;')
+    cur.execute('SELECT id, position, image, pos_copyright FROM Position;')
     positions = cur.fetchall()
-    return render_template("positions.html", positions=positions, title="Waterpolo Players")
+    return render_template("positions.html", positions=positions, title="Women's Waterpolo")
 
 
 @app.route('/position/<int:id>')
@@ -160,7 +166,7 @@ def indiv_position(id):
                 Join Position ON PlayerPosition.position_id=Position.id WHERE Position.id = ?', (id,))
     position_players = cur.fetchall()
     return render_template("position.html", position=position, position_players=position_players, 
-                           title="Waterpolo Players")
+                           title="Women's Waterpolo")
 
 
 @app.errorhandler(404)

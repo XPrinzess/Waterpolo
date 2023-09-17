@@ -4,24 +4,37 @@
 <div class="row">
     {% for item in ranked_players %}
     <div class="column">
-        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </a> </h2> <h3> Female World #{{item[4]}} </h3>
-        <div class="image-stack">
-            <div class="image-stack_bottom">
-              <img src="{{item[3]}}">
+        <div class="zoom">
+            <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </h2> <h3> Female World #{{item[4]}} </h3>
+            <div class="image-stack">
+                <div class="image-stack_bottom">
+                <img src="{{item[3]}}">
+                </div>
+                <div class="image-stack_flag">
+                    <img src="{{item[5]}}">
+                </div>
+            </a>
+                <br>
             </div>
-            <div class="image-stack_flag">
-                <img src="{{item[5]}}">
-              </div>
         </div>
     </div>
     {% endfor %}
-</div>
 
-<div class="row">
     {% for item in players %}
     <div class="column">
-        <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} <br>
-        <img src = "{{item[3]}}"/></a> <img src = "{{item[4]}}"/> </h2>
+        <div class="zoom">
+            <h2><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </h2> <h3> <br> </h3>
+            <div class="image-stack">
+                <div class="image-stack_bottom">
+                <img src="{{item[3]}}">
+                </div>
+                <div class="image-stack_flag">
+                    <img src="{{item[4]}}">
+                </div>
+            </a>
+                <br>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
