@@ -19,6 +19,12 @@ img {
 }
 
 
+.icon img {
+    width: 62px;
+    height: 36px;
+}
+
+
 a {
     color: rgb(0,0,0);
     text-decoration: none;
@@ -141,7 +147,8 @@ header h1 {
     display: flex;
     justify-content: center;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: -15px;
 }
 
 .row {
@@ -344,7 +351,7 @@ footer {
     > h3 {
         color: rgb(240,240,240);
         margin-left: 50px;
-        padding-bottom: 100px;
+        padding-bottom: 200px;
     }
 }
 

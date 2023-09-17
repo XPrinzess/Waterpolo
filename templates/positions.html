@@ -1,11 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<div class="subheading">
+    <h2>
+        Positions
+    </h2>
+</div>
+
 <div class="row">
     {% for item in positions %}
     <div class="column">
         <div class="zoom">
-            <h2><a href = "/position/{{item[0]}}"> {{item[1]}} <br> </h2> <h3> Position #{{item[0]}} </h3>
+            <h3><a href = "/position/{{item[0]}}"> {{item[1]}} <br> </h3> <h4> Position #{{item[0]}} </h4>
             <div class="overlay">
                 <img src = "{{item[2]}}"/>
                 <div class="hovercaption"> 
