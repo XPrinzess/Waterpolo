@@ -7,11 +7,23 @@
 {% block content %}
 
 {% for item in event %}
-    <h2> {{item[4]}} {{item[0]}} <br> <img src ="{{item[2]}}"> <br> {{item[1]}} <br> Matches: {{item[5]}} </h2>
+<div class="subheading">
+    <h2> {{item[4]}} {{item[0]}} <br> <img src ="{{item[2]}}"> </h2>
+</div>
+<div class="subheading1">
+    <h3> {{item[1]}} <br> Matches: {{item[5]}} </h3>
+</div>
 {% endfor %}
 
-{% for item in teams %}
-    <h2> {{item[1]}} <br> <a href = "/country/{{item[0]}}"> <img src ="{{item[2]}}"> </a> </h2>
-{% endfor %}
+<div class="subheading"> <h2> Participating Countries: </h2> </div>
+<div class="row">
+    {% for item in teams %}
+    <div class="column">
+        <div class="zoom">
+            <h3> <a href = "/country/{{item[0]}}"> {{item[1]}} <br> <div class="flag"><img src = "{{item[2]}}"/> </a></div> </h3>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -6,12 +6,34 @@
 
 {% block content %}
 
-{% for item in position %}
-    <h2> {{item[0]}} Players <br> <img src ="{{item[1]}}"> <br> {{item[2]}} </h2>
-{% endfor %}
+<div class="subheading">
+    {% for item in position %}
+        <h2> {{item[0]}}s <br> <img src ="{{item[1]}}"> <br> </h2>
+</div>
+<div class="description">
+    <p> {{item[2]}} </p>
+    {% endfor %}
+</div>
 
-{% for item in position_players %}
-    <h2> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src ="{{item[2]}}"></a> <img src ="{{item[3]}}"> </h2>
-{% endfor %}
+
+<div class="row">
+    {% for item in position_players %}
+    <div class="column">
+        <div class="zoom">
+            <h2><a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} </h2>
+            <div class="image-stack">
+                <div class="image-stack_bottom">
+                <img src="{{item[2]}}">
+                </div>
+                <div class="image-stack_flag">
+                    <img src="{{item[3]}}">
+                </div>
+            </a>
+            <br>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

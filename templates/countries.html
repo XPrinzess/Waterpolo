@@ -6,7 +6,7 @@
     {% for item in countries %}
     <div class="column">
         <div class="zoom">
-            <h2> <a href = "/country/{{item[0]}}"> {{item[1]}} <br> <img src = "{{item[2]}}"/> </a> </h2>
+            <h3> <a href = "/country/{{item[0]}}"> {{item[1]}} <br> <div class="flag"><img src = "{{item[2]}}"/> </div></a> </h3>
         </div>
     </div>
     {% endfor %}
