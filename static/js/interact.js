@@ -1,3 +1,6 @@
+/* code for image carousel on home page */
+/* https://www.w3schools.com/howto/howto_js_slideshow.asp */
+
 let slideIndex = 1;
 showSlides(slideIndex);
 

@@ -6,14 +6,28 @@
 
 {% block content %}
 
+
 {% for item in event %}
 <div class="subheading">
-    <h2> {{item[4]}} {{item[0]}} <br> <img src ="{{item[2]}}"> </h2>
+    <h2> {{item[4]}} {{item[0]}} <br>
+        <div class="row">
+            <div class="column">
+                <div class="overlay">
+                    <img src = "{{item[2]}}"/>
+                    <div class="hovercaption"> 
+                        <p>{{item[6]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
+
 <div class="subheading1">
     <h3> {{item[1]}} <br> Matches: {{item[5]}} </h3>
 </div>
 {% endfor %}
+
+
 
 <div class="subheading"> <h2> Participating Countries: </h2> </div>
 <div class="row">

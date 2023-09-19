@@ -23,18 +23,33 @@
     {% for item in national_team %}
     <div class="column">
         <div class="zoom">
-            <h3> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src = "{{item[2]}}"> </a> </h3>
+            <h3> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> </h3>
+            <div class="overlay">
+                <img src = "{{item[2]}}">
+                <div class="hovercaption">
+                    <p> {{item[5]}}</p>
+                </div>
+            </div>
+            </a>
         </div>
     </div>
     {% endfor %}
 </div>
+
 
 <div class="subheading"> <h2> Former Team Members: </h2> </div>
 <div class="row">
     {% for item in former_team %}
     <div class="column">
         <div class="zoom">
-            <h3> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> <img src ="{{item[2]}}"> </a> </h3>
+            <h3> <a href = "/player/{{item[4]}}"> {{item[0]}} {{item[1]}} <br> </h3>
+            <div class="overlay">
+                <img src = "{{item[2]}}">
+                <div class="hovercaption">
+                    <p> {{item[5]}}</p>
+                </div>
+            </div>
+            </a>
         </div>
     </div>
     {% endfor %}
