@@ -193,6 +193,13 @@ header h1 {
     text-align: center;
 }
 
+.hovercaption p {
+    /* makes size of the copyright caption smaller
+        so that it is not in the way of the image when
+        the user hovers on the image */
+    font-size: 6px;
+}
+
 .overlay:hover .hovercaption {
     opacity: 1;
 }
