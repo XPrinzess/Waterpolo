@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block title %}
+<!-- back button adapted from https://www.w3schools.com/jsref/met_his_back.asp -->
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
 {% endblock %}
 
 {% block content %}
-
-
+<!-- year, name and logo of tournament displayed as subheading of the page -->
 {% for item in event %}
 <div class="subheading">
     <h2> {{item[4]}} {{item[0]}} <br>
@@ -14,6 +14,7 @@
             <div class="column">
                 <div class="overlay">
                     <img src = "{{item[2]}}"/>
+                    <!-- copyright of logo -->
                     <div class="hovercaption"> 
                         <p>{{item[6]}}</p>
                     </div>
@@ -22,14 +23,15 @@
         </div>
 </div>
 
+<!-- extra information about the specific tournament -->
 <div class="subheading1">
     <h3> {{item[1]}} <br> Matches: {{item[5]}} </h3>
 </div>
 {% endfor %}
 
 
-
 <div class="subheading"> <h2> Participating Countries: </h2> </div>
+<!-- displays the participating countries for that tournament in neat rows/columns -->
 <div class="row">
     {% for item in teams %}
     <div class="column">

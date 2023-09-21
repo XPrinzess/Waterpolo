@@ -51,8 +51,7 @@ def indiv_country(id):
     former_team = sql('SELECT first_name, last_name, image, \
                         national_team, player.id, Player.player_copyright \
                         FROM Player \
-                        WHERE country_id = ? AND national_team = 0',
-                        (id,))
+                        WHERE country_id = ? AND national_team = 0', (id,))
     return render_template("country.html", country=country,
                            national_team=national_team,
                            former_team=former_team, title="Women's Waterpolo")
@@ -89,54 +88,59 @@ def indiv_player(id):
                     Country.id, Player.player_copyright FROM Player \
                     JOIN Country ON Player.country_id=Country.id \
                     WHERE Player.id = ?', (id,))
-    if player == []:  # if query gives no result error page is shown
+    if player == []:  # if query gives no result, error page is shown
         abort(404)
     return render_template("player.html", player=player,
                            title="Women's Waterpolo")
 
 
-@app.route('/tournaments')  # explain loops, pep8 lines
+@app.route('/tournaments')
 def tournaments():
     tid = sql('SELECT DISTINCT name_id FROM Tournament', None)
-    tournaments = []
+    tournaments = []  # makes a variable with an empty list
     for name in tid:
-        # exception of Pep8 line limit for better query readability (line 105+108)
+        # cycles through query the tid times (number of distinct name_id's)
+        # replaces the '?' with the different text value for 'name' each time
+        # Pep8 line limit exception for better query readability (line 106+109)
+        # sql gets all the information about the tournament
         tournament = sql('SELECT Tournament.year, TournamentName.tournament_name, \
                             TournamentName.description, TournamentName.logo, \
                             Tournament.id FROM Tournament \
                             JOIN TournamentName ON Tournament.name_id=TournamentName.id \
                             WHERE Tournament.name_id=?', (name))
+        # tournament variable list has another string of values added each loop
         tournaments.append(tournament)
     return render_template("tournaments.html", tournaments=tournaments,
                            title="Women's Waterpolo")
 
 
-@app.route('/tournament/<int:name_id>/<int:year>')  # there is a data integrety issue
-# comment on queries and explain empty brackets and loops, pep8 lines
+@app.route('/tournament/<int:name_id>/<int:year>')
 def indiv_tournament(name_id, year):
     # slightly different 'if' statement as 2 conditions are used in this route
     # used to prevent overflow error
     if name_id > 9223372036854775807 or year > 9223372036854775807:
         abort(404)
-    # exception of Pep8 line limit for better query readability (line 128)
+    # exception of Pep8 line limit for better query readability (line 130)
+    # sql gets the information about the selected tournament
     event = sql('SELECT TournamentName.tournament_name, \
                     TournamentName.description, TournamentName.logo, \
                     Tournament.name_id, Tournament.year, Tournament.matches, \
                     TournamentName.logo_copyright \
                     FROM Tournament \
                     JOIN TournamentName ON Tournament.name_id=TournamentName.id \
-                    WHERE Tournament.name_id = ? AND Tournament.year = ?',
-                    (name_id, year,))
-    if event == []:
+                    WHERE Tournament.name_id = ? \
+                    AND Tournament.year = ?', (name_id, year,))
+    if event == []:  # if query gives no result, error page is shown
         abort(404)
-    # exception of Pep8 line limit for better query readability (line 136)
+    # exception of Pep8 line limit for better query readability (line 141)
+    # sql gets all the countries that participates in the selected tournament
     teams = sql('SELECT Country.id, Country.country, Country.flag, \
                     Tournament.name_id, Tournament.year \
                     FROM CountryTournament \
                     JOIN Country ON CountryTournament.country_id=Country.id \
                     JOIN Tournament ON CountryTournament.tournament_id=Tournament.id \
-                    WHERE Tournament.name_id = ? AND Tournament.year = ?',
-                    (name_id, year,))
+                    WHERE Tournament.name_id = ? \
+                    AND Tournament.year = ?', (name_id, year,))
     return render_template("tournament.html", event=event, teams=teams,
                            title="Women's Waterpolo")
 
@@ -150,7 +154,7 @@ def positions():
                            title="Women's Waterpolo")
 
 
-@app.route('/position/<int:id>')  # pep8 line
+@app.route('/position/<int:id>')
 def indiv_position(id):
     if id > 9223372036854775807:  # prevents overflow error
         abort(404)
@@ -158,10 +162,10 @@ def indiv_position(id):
     position = sql('SELECT Position.position, Position.image, \
                 Position.description, pos_copyright FROM Position \
                 WHERE Position.id = ?', (id,))
-    if position == []:  # if query gives no result error page is shown
+    if position == []:  # if query gives no result, error page is shown
         abort(404)
-    # exception of Pep8 line limit for better query readability (line 171)
-    # selects all the players who play in the selected position
+    # exception of Pep8 line limit for better query readability (line 174)
+    # sql selects all the players who play in the selected position
     position_players = sql('SELECT Player.first_name, Player.last_name, \
                             Player.image, Country.flag, Player.id \
                             FROM PlayerPosition \

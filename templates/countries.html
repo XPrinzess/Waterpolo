@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!-- displays subheading that helps user know what page they are on -->
 <div class="subheading">
     <h2>
         Countries
     </h2>
 </div>
 
+<!-- displays all the countries in neat rows/columns -->
 <div class="row">
     {% for item in countries %}
     <div class="column">

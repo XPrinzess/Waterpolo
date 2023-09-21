@@ -1,5 +1,4 @@
 /** GLOBAL **/
-
 body {
     font-family: "Comic Sans MS";
     background-image: url("/static/images/pool_background.jpg");
@@ -8,42 +7,50 @@ body {
 }
 
 
+/* dimensions for player images */
 img {
     width: 310px;
     height: 180px;
 }
 
+
+/* dimensions for flags */
 .flag img {
     width: 174px;
     height: 101px;
 }
 
 
+/* dimensions for flags next to player names */
 .icon img {
     width: 62px;
     height: 36px;
 }
 
 
+/* ensures all links are not underlined */
+/* gets rid of default links */
 a {
     color: rgb(0,0,0);
     text-decoration: none;
 }
 
 
+/* zooms in on links when hovered on */
 .zoom:link {
     transition: transform .05s;
 }
-
 
 .zoom:hover, .zoom:active  {
     transform: scale(1.1);
 }
 
 
+/* website header */
 header {
     background-color: rgb(10, 125, 193);
     position: fixed;
+    /* ensures it goes above the content */
     z-index: 3;
     top: 0px;
     left: 0px;
@@ -62,6 +69,7 @@ header h1 {
 }
 
 
+/* navigation menu */
 .nav {
     display: flex;
     flex-flow: row wrap;
@@ -72,7 +80,6 @@ header h1 {
     border-top: 0px;
     top: 0;
 }
-
 
 .nav a:link {
     float: left;
@@ -86,14 +93,15 @@ header h1 {
     transition: transform .05s;
 }
 
-
 .nav a:hover, a.active {
+    /* changes colour of nav when hovered on */
     background-color: rgb(10, 125, 193);
     color: rgb(240,240,240);
     transform: scale(1.1);
 }
 
 
+/* used in the layout.html template for consistency */
 .main {
     display: flex;
     justify-content: center;
@@ -103,7 +111,7 @@ header h1 {
     margin-bottom: -45px;
 }
 
-
+/* inside main --> visible box with main content inside it */
 .container {
     background-color: rgb(165, 244, 244);
     margin: auto;
@@ -112,6 +120,7 @@ header h1 {
 }
 
 
+/* back button */
 .back {
     text-decoration: none;
     position: absolute;
@@ -123,20 +132,21 @@ header h1 {
     padding: 25px 5px;
 }
 
-
 .back button:link {
     background-color: rgb(165, 244, 244);
     color: rgb(0, 0, 0);
 }
 
-
 .back button:hover, button:active {
+    /* changes appearance of cursor */
     cursor: pointer;
     background-color: rgb(165, 244, 244);
     color: rgb(0,0,0);
 }
 
 
+/* individual page headings and titles inside container */
+/* heading for the entire individual page */
 .subheading {
     display: flex;
     justify-content: center;
@@ -145,6 +155,8 @@ header h1 {
     margin-bottom: -10px;
 }
 
+/* subheading for the subheading */
+/* eg. heading for 'Current National Team:' */
 .subheading1 {
     display: flex;
     justify-content: center;
@@ -153,6 +165,8 @@ header h1 {
     margin-bottom: -15px;
 }
 
+
+/* flex box structure that allows the content to line up */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -165,8 +179,8 @@ header h1 {
     }
 }
 
-
 .column h2, h3, h4 {
+    /* centres all the text in the flex box rows/columns */
     text-align: center;
 }
 
@@ -175,8 +189,8 @@ header h1 {
 /* adapted from https://www.w3schools.com/howto/howto_css_image_overlay_title.asp */
 .overlay {
     position: relative;
-    width: 100%;
-    max-width: 310px;
+    width: 310px;
+    text-align: center;
 }
 
 .hovercaption {
@@ -185,11 +199,11 @@ header h1 {
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
-    max-width: 100%;
+    max-width: 310px;
+    width: 310px;
     transition: .5s ease;
     opacity:0;
-    color: white;
-    font-size: 8px;
+    color: rgb(255,255,255);
     text-align: center;
 }
 
@@ -206,11 +220,12 @@ header h1 {
 
 
 /* css for image carousel on home page */
-/* https://www.w3schools.com/howto/howto_js_slideshow.asp */
+/* adapted from https://www.w3schools.com/howto/howto_js_slideshow.asp */
 .slidesfade {
     display: none;
 }
 
+/* dimensions of images used on home page in carousel */
 .photo img {
     vertical-align: middle;
     width: 810px;
@@ -224,6 +239,7 @@ header h1 {
     margin-top: 80px;
 }
 
+/* arrows for moving image carousel along */
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -231,9 +247,10 @@ header h1 {
     width: auto;
     padding: 16px;
     margin-top: -22px;
-    color: white;
+    color: rgb(255,255,255);
     font-weight: bold;
     font-size: 18px;
+    /* image fades into next */
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
@@ -241,14 +258,17 @@ header h1 {
 }
 
 .next {
+    /* positions next arrow on the right of the image */
     right: 0;
     border-radius: 3px 0 0 3px;
 }
   
 .prev:hover, .next:hover {
+    /* gets darker on hover */
     background-color: rgba(0,0,0,0.8);
 }
-  
+
+/* copyright just for images on carousel */
 .copyright {
     color: #f2f2f2;
     background: rgba(0, 0, 0, 0.5);
@@ -260,6 +280,8 @@ header h1 {
     text-align: center;
 }
 
+/* number in top left of image carousel */
+/* tells user how many images there are */
 .number {
     color: #f2f2f2;
     font-size: 12px;
@@ -268,6 +290,8 @@ header h1 {
     top: 0;
 }
 
+/* dots underneath the image carousel */
+/* visually represent where the user is at in the carousel */
 .dot {
     cursor: pointer;
     height: 15px;
@@ -284,31 +308,39 @@ header h1 {
 }
 
 
-
+/* brief description about waterpolo on home page */
 .content {
+    /* positions the text away from the edge of the container */
+    /* ensures better alignment */
     margin: 10%;
     margin-top: 20px;
     margin-bottom: 25px;
 }
 
 
+/* CSS for alignment of images on 'Players' page */
 .image-stack::after {
     content: ' ';
     display: table;
     clear: both;
 }
-  
+
+/* player image CSS on 'Players' page */
 .image-stack_bottom {
     align-items: center;
     padding-top: 0%;
 }
-  
+
+/* flag image CSS on 'Players' page */
 .image-stack_flag {
   float: left;
   position: relative;
+  /* positions flag in bottom left corner of player image */
   margin-left: 0%;
   margin-top: -16%;
+  /* positions flag on top of player image */
   z-index: 1;
+  /* makes dimensions of flag smaller */
   > img {
     width: 77.5px;
     height: 45px;
@@ -334,6 +366,7 @@ header h1 {
         margin-right: 300px;
         height: 300px;
         background-color:rgba(255, 49, 49, 0.777);
+        /* makes image round */
         border-radius: 200px;
     }
 }
@@ -353,6 +386,7 @@ footer {
 }
 
 
+/* 'Position' description on 'indiv_position' route */
 .description p {
     text-align: center;
     margin-top: 30px;

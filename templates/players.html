@@ -1,17 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!-- displays subheading that helps user know what page they are on -->
 <div class="subheading">
     <h2>
         Players
     </h2>
 </div>
 
+<!-- displays all the ranked_players in neat rows/columns -->
 <div class="row">
     {% for item in ranked_players %}
     <div class="column">
+        <!-- entire zoom div is a link and gets bigger when hovered on -->
         <div class="zoom">
             <h3><a href = "/player/{{item[0]}}"> {{item[1]}} {{item[2]}} </h3> <h4> Female World #{{item[4]}} </h4>
+            <!-- flag is displayed on top of player image -->
             <div class="image-stack">
                 <div class="image-stack_bottom">
                 <img src="{{item[3]}}">
@@ -26,6 +30,8 @@
     </div>
     {% endfor %}
 
+    
+    <!-- displays the rest of the players (non-ranked) in neat rows/columns -->
     {% for item in players %}
     <div class="column">
         <div class="zoom">

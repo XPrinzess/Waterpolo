@@ -1,17 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<!-- displays subheading that helps user know what page they are on -->
 <div class="subheading">
     <h2>
         Tournaments
     </h2>
 </div>
 
-
 <div class="row">
+    <!-- displays all the distinct tournament names and their logos -->
     {% for tournament in tournaments %}
     <div class="column">
         <h3> {{tournament[0][1]}} <br> <img src = "{{tournament[0][3]}}"/> </h3>
+        <!-- displays all the years for that specific distinct tournament name -->
         {% for year in tournament %}
         <div class="zoom">
             <h3> <a href = "/tournament/{{tournament[0][4]}}/{{year[0]}}"> {{year[0]}} </a> <br> </h3>

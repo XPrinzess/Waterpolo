@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 
 {% block title %}
+<!-- back button adapted from https://www.w3schools.com/jsref/met_his_back.asp -->
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
 {% endblock %}
 
 {% block content %}
-
+<!-- selected position name and image displayed as subheading of the page -->
 <div class="subheading">
     <div class="row">
     {% for item in position %}
@@ -20,12 +21,13 @@
         </div>
     </div>
 </div>
+<!-- selected position description displayed -->
 <div class="description">
     <p> {{item[2]}} </p>
     {% endfor %}
 </div>
 
-
+<!-- displays all the players who play in that selected position in neat rows/columns -->
 <div class="row">
     {% for item in position_players %}
     <div class="column">

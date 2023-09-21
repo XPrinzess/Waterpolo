@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
-{% block content %}
 
+{% block content %}
+<!-- displays subheading that helps user know what page they are on -->
 <div class="subheading">
     <h2>
         Positions
     </h2>
 </div>
 
+<!-- displays all the positions and their images and copyrights in neat rows/columns -->
 <div class="row">
     {% for item in positions %}
     <div class="column">
@@ -24,6 +26,5 @@
     </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}

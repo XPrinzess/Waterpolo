@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
-
 {% block title %}
+<!-- back button adapted from https://www.w3schools.com/jsref/met_his_back.asp -->
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
 {% endblock %}
 
 {% block content %}
 
+<!-- displays error message -->
 <div class="error">
     <h1> ERROR 404! </h1>
     <h2>This page does not exist.</h2>

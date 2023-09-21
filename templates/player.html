@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
-
 {% block title %}
+<!-- back button adapted from https://www.w3schools.com/jsref/met_his_back.asp -->
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
 {% endblock %}
 
 {% block content %}
-
 {% for item in player %}
 <h2>
+    <!-- displays name and country flag related to the selected player as the subheading of the page -->
     <div class="subheading">
         <div class="row">
             {{item[0]}} {{item[1]}} &nbsp;
@@ -17,6 +17,9 @@
         </div>
     </div>
 
+    <!-- displays an image of the player underneath the subheading -->
+    <!-- the image has a copyright caption when hovered on -->
+    <!-- the image gets bigger when hovered on to show the use that it is a link -->
     <div class="row">
         <div class="column">
             <div class="overlay">
@@ -29,9 +32,10 @@
     </div>
 </h2>
 
-
+    <!-- if statements that are determined by the binary used as entries in the database -->
     <div class="content">
         <p>
+        <!-- if player is in the national team member or not -->
         {% if item[11] %}
             {{item[0]}} {{item[1]}} currently plays waterpolo for the {{item[7]}} National Waterpolo Team.
         {% else %}
@@ -41,6 +45,7 @@
             She is {{item[4]}}cm tall and weighs {{item[3]}}kg.
             <br>
         
+        <!-- if player is ranked in the top 10 -->
         {% if item[5] %}  
             <br>
             She is ranked #{{item[5]}} out of the best 10 female waterpolo players in the world.
@@ -50,6 +55,7 @@
             <br>
             Most of the time she plays as cap number {{item[6]}}. <br>
 
+        <!-- player's dominant hand -->
         {% if item[9] and item[10] %}
             <br> {{item[1]}} is ambidextrous, meaning that she uses both her left and right hand equally well. <br>
         {% elif item[9] %}

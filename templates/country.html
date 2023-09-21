@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
-
 {% block title %}
+<!-- back button adapted from https://www.w3schools.com/jsref/met_his_back.asp -->
 <div class="back"> <button onclick="history.back()"> <h2> &laquo; Back </h2> </button> </div>
 {% endblock %}
+
 
 {% block content %}
 
 <h1>
+<!-- displays country selected as subheading of the page -->
 {% for item in country %}
 <div class="subheading1">
     <div class="row">
@@ -17,8 +19,13 @@
 {% endfor %}
 </h1>
 
+<!-- if there is no result for the variable produced by the sql query, the subheading won't display -->
+{% if national_team|length %}
+    <div class="subheading"> <h2> Current National Team Players: </h2> </div>
+{% else %}
+{% endif %}
 
-<div class="subheading"> <h2> Current National Team: </h2> </div>
+<!-- displays current national team players in lined up rows and columns -->
 <div class="row">
     {% for item in national_team %}
     <div class="column">
@@ -36,8 +43,14 @@
     {% endfor %}
 </div>
 
+<!-- if there is no result for the variable produced by the sql query, the subheading won't display -->
+{% if former_team|length %}
+    <div class="subheading"> <h2> Former Team Members: </h2> </div>
+{% else %}
+    <br><br><br><br><br><br><br><br><br>
+{% endif %}
 
-<div class="subheading"> <h2> Former Team Members: </h2> </div>
+<!-- displays former team players in lined up rows and columns -->
 <div class="row">
     {% for item in former_team %}
     <div class="column">
